@@ -94,7 +94,8 @@ export default function MenuPage() {
     formData.append('file', file);
 
     try {
-      const res = await fetch('/api/upload', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const res = await fetch(`${apiUrl}/api/upload`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

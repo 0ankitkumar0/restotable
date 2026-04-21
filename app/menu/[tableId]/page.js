@@ -24,7 +24,8 @@ export default function CustomerMenuPage({ params }) {
 
   async function loadMenu() {
     try {
-      const res = await fetch(`/api/public/menu/${tableId}`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const res = await fetch(`${apiUrl}/api/public/menu/${tableId}`);
       if (res.ok) {
         const d = await res.json();
         setTable(d.table);
@@ -39,7 +40,8 @@ export default function CustomerMenuPage({ params }) {
 
   async function loadOrders() {
     try {
-      const res = await fetch(`/api/public/table-orders/${tableId}`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const res = await fetch(`${apiUrl}/api/public/table-orders/${tableId}`);
       if (res.ok) {
         const d = await res.json();
         setOrders(d.orders || []);
@@ -88,7 +90,8 @@ export default function CustomerMenuPage({ params }) {
     if (!customerPhone.trim() || customerPhone.trim().length < 10) { alert('Please enter a valid phone number'); return; }
     setPlacing(true);
     try {
-      const res = await fetch('/api/public/orders', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const res = await fetch(`${apiUrl}/api/public/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

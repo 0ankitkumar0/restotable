@@ -29,7 +29,7 @@ export default function WaiterOrderPage({ params }) {
         authFetch('/api/tables'),
         authFetch('/api/menu'),
         authFetch('/api/categories'),
-        fetch(`/api/public/table-orders/${tableId}`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/public/table-orders/${tableId}`),
       ]);
       if (tablesRes.ok) {
         const d = await tablesRes.json();
@@ -80,7 +80,8 @@ export default function WaiterOrderPage({ params }) {
     if (cart.length === 0) return;
     setPlacing(true);
     try {
-      const res = await fetch('/api/public/orders', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const res = await fetch(`${apiUrl}/api/public/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
