@@ -44,7 +44,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] p-5">
       <div className="bg-white rounded-2xl px-10 py-12 w-full max-w-[420px] shadow-xl">
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-[#c0392b] rounded-xl inline-flex items-center justify-center text-white text-2xl mb-4 shadow-lg shadow-red-900/20">🍽</div>
+          <img src="/web-app-manifest-512x512.png" alt="RestoTable Logo" className="w-20 h-20 mx-auto mb-4 rounded-xl shadow-lg shadow-red-900/20" />
           <h1 className="text-2xl font-bold text-[#1a1a2e] tracking-tight mb-2">RestoTable</h1>
           <p className="text-[#64748b] text-sm">Sign in to your restaurant dashboard</p>
         </div>
