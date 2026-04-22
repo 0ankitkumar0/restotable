@@ -4,12 +4,28 @@ import { useState } from 'react';
 export default function DemoForm() {
   const [status, setStatus] = useState('idle');
 
-  function handleSubmit(e) {
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', note: '' });
+
+  async function handleSubmit(e) {
     e.preventDefault();
     setStatus('loading');
-    setTimeout(() => {
-      setStatus('success');
-    }, 1500);
+    try {
+      const res = await fetch('/api/demo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      if (res.ok) {
+        setStatus('success');
+        setFormData({ name: '', phone: '', email: '', note: '' });
+      } else {
+        setStatus('idle');
+        alert('Failed to send request. Please try again.');
+      }
+    } catch {
+      setStatus('idle');
+      alert('Network error. Please try again.');
+    }
   }
 
   return (
@@ -35,15 +51,19 @@ export default function DemoForm() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                  <input type="text" required placeholder="John Doe" className="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#c0392b] focus:ring-2 focus:ring-[#c0392b]/20 transition-all outline-none bg-gray-50 focus:bg-white" />
+                  <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required placeholder="John Doe" className="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#c0392b] focus:ring-2 focus:ring-[#c0392b]/20 transition-all outline-none bg-gray-50 focus:bg-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                  <input type="tel" required placeholder="+1 (555) 000-0000" className="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#c0392b] focus:ring-2 focus:ring-[#c0392b]/20 transition-all outline-none bg-gray-50 focus:bg-white" />
+                  <input type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} required placeholder="+1 (555) 000-0000" className="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#c0392b] focus:ring-2 focus:ring-[#c0392b]/20 transition-all outline-none bg-gray-50 focus:bg-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                  <input type="email" required placeholder="john@restaurant.com" className="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#c0392b] focus:ring-2 focus:ring-[#c0392b]/20 transition-all outline-none bg-gray-50 focus:bg-white" />
+                  <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} required placeholder="john@restaurant.com" className="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#c0392b] focus:ring-2 focus:ring-[#c0392b]/20 transition-all outline-none bg-gray-50 focus:bg-white" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Note (Optional)</label>
+                  <textarea value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})} placeholder="Tell us about your restaurant or ask any questions..." rows="3" className="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#c0392b] focus:ring-2 focus:ring-[#c0392b]/20 transition-all outline-none bg-gray-50 focus:bg-white"></textarea>
                 </div>
                 <button type="submit" disabled={status === 'loading'} className="w-full py-4 bg-[#c0392b] text-white rounded-xl font-bold text-lg hover:bg-[#a93226] transition-all shadow-lg shadow-red-900/20 hover:-translate-y-0.5 disabled:opacity-70">
                   {status === 'loading' ? 'Submitting...' : 'Get Demo'}
