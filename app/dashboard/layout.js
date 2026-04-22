@@ -36,7 +36,7 @@ export default function DashboardLayout({ children }) {
         <div className="px-5 py-6 flex items-center gap-3">
           <div className="w-10 h-10 bg-[#c0392b] rounded-lg flex items-center justify-center text-white text-lg shrink-0">🍽</div>
           <div>
-            <h2 className="text-[17px] font-bold text-[#1a1a2e] leading-tight">RestoPOS</h2>
+            <h2 className="text-[17px] font-bold text-[#1a1a2e] leading-tight">RestoTable</h2>
             <span className="text-xs text-[#94a3b8] font-medium">Restaurant Dashboard</span>
           </div>
         </div>

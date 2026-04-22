@@ -143,7 +143,7 @@ export default function CustomerMenuPage({ params }) {
       <header className="bg-white border-b border-[#e2e8f0] p-5 sticky top-0 z-50 shadow-sm">
         <div className="flex items-center justify-between max-w-4xl mx-auto">
           <div>
-            <h1 className="text-2xl font-extrabold text-[#1a1a2e] tracking-tight">RestoPOS</h1>
+            <h1 className="text-2xl font-extrabold text-[#1a1a2e] tracking-tight">RestoTable</h1>
             <p className="text-sm font-medium text-[#64748b]">You&apos;re at Table {table?.table_number}</p>
           </div>
           <div>

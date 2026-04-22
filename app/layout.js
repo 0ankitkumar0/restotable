@@ -2,7 +2,7 @@ import './globals.css';
 import { AuthProvider } from '@/lib/AuthContext';
 
 export const metadata = {
-  title: 'RestoPOS - Restaurant Management System',
+  title: 'RestoTable - Restaurant Management System',
   description: 'Modern restaurant POS and management system with menu, orders, tables & QR, inventory, reports, and staff management.',
 };
 

@@ -36,7 +36,7 @@ export default function WaiterLayout({ children }) {
         <button className="text-[#1a1a2e] text-2xl p-1" onClick={() => setSidebarOpen(!sidebarOpen)}>☰</button>
         <div className="flex items-center gap-2">
           <span className="w-8 h-8 bg-[#c0392b] rounded-lg flex items-center justify-center text-white text-sm">🍽</span>
-          <span className="font-bold text-[#1a1a2e]">RestoPOS</span>
+          <span className="font-bold text-[#1a1a2e]">RestoTable</span>
         </div>
         <div className="w-9"></div>
       </div>
@@ -50,7 +50,7 @@ export default function WaiterLayout({ children }) {
         <div className="px-5 py-6 flex items-center gap-3">
           <div className="w-10 h-10 bg-[#c0392b] rounded-lg flex items-center justify-center text-white text-lg shrink-0">🍽</div>
           <div>
-            <h2 className="text-[17px] font-bold text-[#1a1a2e] leading-tight">RestoPOS</h2>
+            <h2 className="text-[17px] font-bold text-[#1a1a2e] leading-tight">RestoTable</h2>
             <span className="text-xs text-[#94a3b8] font-medium">Waiter Panel</span>
           </div>
         </div>

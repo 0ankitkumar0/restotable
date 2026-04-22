@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'RestoPOS — Order Menu',
+  title: 'RestoTable — Order Menu',
   description: 'Browse the menu and place your order',
 };
 

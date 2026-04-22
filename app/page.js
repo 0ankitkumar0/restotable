@@ -45,7 +45,7 @@ export default function LoginPage() {
       <div className="bg-white rounded-2xl px-10 py-12 w-full max-w-[420px] shadow-xl">
         <div className="text-center mb-8">
           <div className="w-14 h-14 bg-[#c0392b] rounded-xl inline-flex items-center justify-center text-white text-2xl mb-4 shadow-lg shadow-red-900/20">🍽</div>
-          <h1 className="text-2xl font-bold text-[#1a1a2e] tracking-tight mb-2">RestoPOS</h1>
+          <h1 className="text-2xl font-bold text-[#1a1a2e] tracking-tight mb-2">RestoTable</h1>
           <p className="text-[#64748b] text-sm">Sign in to your restaurant dashboard</p>
         </div>
         
@@ -62,7 +62,7 @@ export default function LoginPage() {
               type="email" 
               value={email} 
               onChange={e => setEmail(e.target.value)} 
-              placeholder="admin@restopos.com" 
+              placeholder="admin@restotable.com" 
               required 
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-[#c0392b] focus:bg-white transition-all"
             />
