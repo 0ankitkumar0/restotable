@@ -5,10 +5,12 @@ export function middleware(request) {
   if (request.nextUrl.pathname.startsWith('/api/')) {
     const response = NextResponse.next();
 
-    // Add CORS headers
-    response.headers.set('Access-Control-Allow-Origin', '*'); // In production, replace * with your Vercel URL
+    // CORS: Allow the Vercel frontend origin, or * for development
+    const allowedOrigin = process.env.ALLOWED_ORIGIN || '*';
+    response.headers.set('Access-Control-Allow-Origin', allowedOrigin);
     response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    response.headers.set('Access-Control-Allow-Credentials', 'true');
 
     // Handle preflight requests
     if (request.method === 'OPTIONS') {
