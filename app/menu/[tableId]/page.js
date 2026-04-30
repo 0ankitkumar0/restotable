@@ -25,7 +25,7 @@ export default function CustomerMenuPage({ params }) {
   async function loadMenu() {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const res = await fetch(`${apiUrl}/api/public/menu/${tableId}`);
+      const res = await fetch(`/api/public/menu/${tableId}`);
       if (res.ok) {
         const d = await res.json();
         setTable(d.table);
@@ -34,14 +34,17 @@ export default function CustomerMenuPage({ params }) {
       } else {
         setError('Table not found');
       }
-    } catch (e) { setError('Failed to load menu'); }
+    } catch (e) { 
+      console.error('Menu Load Error:', e);
+      setError('Failed to load menu'); 
+    }
     finally { setLoading(false); }
   }
 
   async function loadOrders() {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const res = await fetch(`${apiUrl}/api/public/table-orders/${tableId}`);
+      const res = await fetch(`/api/public/table-orders/${tableId}`);
       if (res.ok) {
         const d = await res.json();
         setOrders(d.orders || []);
@@ -91,7 +94,7 @@ export default function CustomerMenuPage({ params }) {
     setPlacing(true);
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const res = await fetch(`${apiUrl}/api/public/orders`, {
+      const res = await fetch(`/api/public/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -115,7 +118,10 @@ export default function CustomerMenuPage({ params }) {
         const d = await res.json();
         alert(d.error || 'Failed to place order');
       }
-    } catch (e) { alert('Network error'); }
+    } catch (e) { 
+      console.error('Order Submission Error:', e);
+      alert('Network error: ' + (e.message || 'Please check your connection')); 
+    }
     finally { setPlacing(false); }
   }
 

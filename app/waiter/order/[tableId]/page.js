@@ -29,7 +29,7 @@ export default function WaiterOrderPage({ params }) {
         authFetch('/api/tables'),
         authFetch('/api/menu'),
         authFetch('/api/categories'),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/public/table-orders/${tableId}`),
+        fetch(`/api/public/table-orders/${tableId}`),
       ]);
       if (tablesRes.ok) {
         const d = await tablesRes.json();
@@ -81,7 +81,7 @@ export default function WaiterOrderPage({ params }) {
     setPlacing(true);
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const res = await fetch(`${apiUrl}/api/public/orders`, {
+      const res = await fetch(`/api/public/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -103,7 +103,10 @@ export default function WaiterOrderPage({ params }) {
         const d = await res.json();
         alert(d.error || 'Failed to place order');
       }
-    } catch (e) { alert('Network error'); }
+    } catch (e) { 
+      console.error('Order Submission Error:', e);
+      alert('Network error: ' + (e.message || 'Please check your connection')); 
+    }
     finally { setPlacing(false); }
   }
 

@@ -12,7 +12,8 @@ export default function LoginPage() {
   const router = useRouter();
 
   function getRedirectPath(role) {
-    if (role === 'waiter' || role === 'kitchen') return '/waiter';
+    if (role === 'waiter') return '/waiter';
+    if (role === 'kitchen') return '/kitchen';
     return '/dashboard';
   }
 

@@ -16,7 +16,7 @@ export async function POST(request) {
   const user = await getUserFromToken(request);
   if (!user || user.role !== 'admin') return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const { name, email, password, role } = await request.json();
+  const { name, email, phone, password, role } = await request.json();
   if (!name || !email || !password) return NextResponse.json({ error: 'Name, email, and password are required' }, { status: 400 });
 
   await connectDB();
@@ -24,7 +24,7 @@ export async function POST(request) {
   if (existing) return NextResponse.json({ error: 'Email already exists' }, { status: 409 });
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  const member = await User.create({ name, email, password: hashedPassword, role: role || 'waiter' });
+  const member = await User.create({ name, email, phone, password: hashedPassword, role: role || 'waiter' });
   
   const safeMember = member.toObject();
   delete safeMember.password;

@@ -94,8 +94,7 @@ export default function MenuPage() {
     formData.append('file', file);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const res = await fetch(`${apiUrl}/api/upload`, {
+      const res = await fetch(`/api/upload`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -109,8 +108,8 @@ export default function MenuPage() {
         alert('Upload failed');
       }
     } catch (e) {
-      console.error(e);
-      alert('Error uploading file');
+      console.error('Upload Error:', e);
+      alert('Error uploading file: ' + e.message);
     } finally {
       setUploading(false);
     }

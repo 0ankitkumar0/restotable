@@ -6,14 +6,14 @@ function formatOrder(doc) {
   const order = doc.toObject();
   if (order.table_id && order.table_id.table_number) {
     order.table_number = order.table_id.table_number;
-    order.table_id = order.table_id._id.toString();
+    order.table_id = (order.table_id._id || order.table_id.id).toString();
   }
   
   if (order.items) {
     order.items = order.items.map(item => {
       if (item.menu_item_id && item.menu_item_id.name) {
         item.item_name = item.menu_item_id.name;
-        item.menu_item_id = item.menu_item_id._id.toString();
+        item.menu_item_id = (item.menu_item_id._id || item.menu_item_id.id).toString();
       }
       return item;
     });
