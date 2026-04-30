@@ -22,19 +22,23 @@ function formatOrder(doc) {
 }
 
 export async function GET(request, { params }) {
-  const { tableId } = await params;
-  
-  await connectDB();
-  
-  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-  
-  const orders = await Order.find({
-    table_id: tableId,
-    $or: [
-      { status: { $nin: ['completed', 'cancelled'] } },
-      { status: 'cancelled', updatedAt: { $gte: oneHourAgo } }
-    ]
-  }).sort({ createdAt: -1 }).populate('table_id').populate('items.menu_item_id');
-  
-  return NextResponse.json({ orders: orders.map(formatOrder) });
+  try {
+    const { tableId } = await params;
+    await connectDB();
+    
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    
+    const orders = await Order.find({
+      table_id: tableId,
+      $or: [
+        { status: { $nin: ['completed', 'cancelled'] } },
+        { status: 'cancelled', updatedAt: { $gte: oneHourAgo } }
+      ]
+    }).sort({ createdAt: -1 }).populate('table_id').populate('items.menu_item_id');
+    
+    return NextResponse.json({ orders: orders.map(formatOrder) });
+  } catch (error) {
+    console.error('Fetch Table Orders Error:', error);
+    return NextResponse.json({ error: 'Failed to fetch orders', details: error.message }, { status: 500 });
+  }
 }

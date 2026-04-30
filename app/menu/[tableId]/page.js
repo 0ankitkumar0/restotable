@@ -22,6 +22,15 @@ export default function CustomerMenuPage({ params }) {
   useEffect(() => { loadMenu(); loadOrders(); }, [tableId]);
   useEffect(() => { if (showTracker) loadOrders(); }, [showTracker]);
 
+  // Auto-refresh orders every 10 seconds if there are active orders
+  useEffect(() => {
+    if (orders.length === 0) return;
+    const interval = setInterval(() => {
+      loadOrders();
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [orders.length, tableId]);
+
   async function loadMenu() {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
