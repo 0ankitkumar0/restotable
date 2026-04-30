@@ -327,6 +327,26 @@ export default function CustomerMenuPage({ params }) {
         </div>
       )}
 
+      {/* Floating Order Tracker Bar (if no cart) */}
+      {orders.length > 0 && cartCount === 0 && !showTracker && (
+        <div 
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-[400px] bg-emerald-600 text-white rounded-2xl p-4 flex items-center justify-between shadow-2xl z-40 cursor-pointer hover:-translate-y-1 transition-transform animate-slide-up" 
+          onClick={() => setShowTracker(true)}
+        >
+          <div className="flex items-center gap-3">
+            <div className="bg-white/20 w-10 h-10 rounded-xl flex items-center justify-center text-lg">📋</div>
+            <div className="flex flex-col">
+              <span className="font-bold text-[15px] leading-tight">Track Your Order</span>
+              <span className="text-[11px] text-emerald-100 font-medium">{orders.length} active order{orders.length > 1 ? 's' : ''}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-[13px] bg-white/20 px-3 py-1 rounded-full uppercase tracking-wider">View Status</span>
+            <span className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-lg">→</span>
+          </div>
+        </div>
+      )}
+
       {/* Cart Modal */}
       {showCart && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex flex-col justify-end transition-opacity animate-fade-in" onClick={() => setShowCart(false)}>
